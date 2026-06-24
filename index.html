@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artur Drohobytskyy - Software Engineer</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #0f172a;
+      --muted: #64748b;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --line: rgba(56, 189, 248, 0.18);
+      --navy: #0f172a;
+      --slate: #1e293b;
+      --slate-soft: #334155;
+      --sky: #38bdf8;
+      --indigo: #818cf8;
+      --blue: #2563eb;
+      --shadow: 0 18px 45px rgba(15, 23, 42, 0.12);
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.16), transparent 34rem),
+        radial-gradient(circle at 85% 12%, rgba(129, 140, 248, 0.18), transparent 28rem),
+        linear-gradient(180deg, #f8fafc 0%, #eef6ff 45%, #ffffff 100%);
+      color: var(--ink);
+      scroll-behavior: smooth;
+    }
+    header {
+      background: linear-gradient(135deg, var(--navy), var(--slate), var(--slate-soft));
+      color: #fff;
+      padding: 5rem 1rem 3rem 1rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, rgba(255,255,255,0.65) 1px, transparent 1px),
+        radial-gradient(circle, rgba(56,189,248,0.55) 1px, transparent 1px);
+      background-size: 42px 42px, 76px 76px;
+      background-position: 0 0, 18px 26px;
+      opacity: 0.22;
+      animation: drift 18s linear infinite;
+    }
+    @keyframes drift {
+      from { transform: translateY(0); }
+      to { transform: translateY(42px); }
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 50%;
+      top: -50px;
+      right: -50px;
+      animation: pulse 5s infinite ease-in-out;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.3; }
+      50% { transform: scale(1.2); opacity: 0.6; }
+      100% { transform: scale(1); opacity: 0.3; }
+    }
+    header h1,
+    header p {
+      position: relative;
+      z-index: 1;
+    }
+    header h1 {
+      font-size: 3rem;
+      margin-bottom: 0.5rem;
+      font-weight: 800;
+    }
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.88);
+      border: 1px solid rgba(255, 255, 255, 0.72);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+      animation: slideIn 1.2s ease-out;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      position: relative;
+      color: var(--sky);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      background: linear-gradient(90deg, var(--sky), var(--indigo));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 68px;
+      height: 4px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sky), var(--indigo));
+    }
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+    .company-card {
+      position: relative;
+      margin: 1.5rem 0 2rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, rgba(255,255,255,0.96), rgba(239,246,255,0.88));
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      box-shadow: 0 14px 32px rgba(37, 99, 235, 0.07);
+      overflow: hidden;
+    }
+    .company-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: linear-gradient(180deg, var(--sky), var(--indigo), var(--blue));
+    }
+    .company-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 18px 42px rgba(37, 99, 235, 0.12);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .company-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      align-items: flex-start;
+      margin-bottom: 0.75rem;
+    }
+    .company-role {
+      display: inline-block;
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .company-period {
+      flex: 0 0 auto;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      background: rgba(56, 189, 248, 0.12);
+      color: #0284c7;
+      font-size: 0.85rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    ul {
+      margin-left: 1.5rem;
+      list-style: square;
+    }
+    section {
+      margin-bottom: 2.5rem;
+    }
+    .tag {
+      display: inline-block;
+      background: rgba(56, 189, 248, 0.12);
+      color: #0284c7;
+      font-size: 0.85rem;
+      padding: 0.35rem 0.7rem;
+      border-radius: 20px;
+      margin: 0.25rem;
+      box-shadow: 0 6px 16px rgba(56, 189, 248, 0.14);
+    }
+    footer {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #999;
+      padding: 2rem 1rem;
+      background: #f9f9f9;
+    }
+    details {
+      margin: 1rem 0;
+      border-left: 4px solid var(--sky);
+      padding: 1rem 1rem 1rem 1.2rem;
+      background: var(--surface-soft);
+      transition: all 0.3s ease-in-out;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+    summary {
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+    }
+    summary::marker {
+      color: var(--sky);
+    }
+    a {
+      color: var(--blue);
+    }
+    @media (max-width: 720px) {
+      header h1 { font-size: 2.25rem; }
+      main { margin: 1rem; padding: 1.25rem; border-radius: 18px; }
+      .company-header { flex-direction: column; }
+      .company-period { align-self: flex-start; }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Artur Drohobytskyy</h1>
+    <p>Email: artur.drohobytskyy@icloud.com</p>
+    <p>Senior iOS Developer • Software Engineer</p>
+  </header>
+  <main>
+    <section>
+      <h2>Professional Summary</h2>
+      <p>Over <span id="yearsCount"></span> years of experience building robust, scalable, and user-friendly mobile applications. I specialize in Swift and Objective-C development with a strong background in backend and web technologies. I bring leadership, attention to detail, and a product-driven mindset to every project, and love transforming ideas into elegant solutions for real-world challenges.</p>
+      <div>
+        <span class="tag">Swift</span>
+        <span class="tag">Objective-C</span>
+        <span class="tag">UIKit</span>
+        <span class="tag">SwiftUI</span>
+        <span class="tag">Combine</span>
+        <span class="tag">XCTest</span>
+        <span class="tag">MVC</span>
+        <span class="tag">MVP</span>
+        <span class="tag">MVVM</span>
+        <span class="tag">Agile</span>
+        <span class="tag">CI/CD</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Accessibility</span>
+      </div>
+      <details>
+          <summary>Show more</summary>
+          <ul>
+              <li>Proven track record in leading complex projects for the financial sector, including home banking apps, leveraging modern development methodologies like Agile, CI/CD, and industry best practices such as SOLID principles and unit testing</li>
+              <li>Seeking to contribute to innovative mobile solutions in a dynamic environment</li>
+              <li>Participate in the full software development lifecycle, from planning and coding to testing and deployment</li>
+              <li>Expertise in modern iOS UI development</li>
+              <li>Experience in implementing accessibility features</li>
+              <li>Proficiency in Combine and Concurrency</li>
+              <li>Proficiency with URLSession and REST APIs</li>
+              <li>Experience with secure storage solutions like Keychain Services and data encryption techniques</li>
+              <li>A solid understanding of Apple’s Human Interface Guidelines</li>
+              <li>Familiarity with testing frameworks such as XCTest</li>
+              <li>Experience with Xamarin, Android development and Web development</li>
+              <li>Collaborate with cross-functional teams, including UX/UI designers, backend developers, and product managers, to transform requirements into robust mobile solutions</li>
+              <li>Stay updated with the latest iOS technologies, Swift best practices, and industry trends</li>
+              <li>Bachelor’s degree in Software Engineering</li>
+          </ul>
+      </details>
+    </section>
+
+    <section>
+      <h2>Professional Experience</h2>
+      <article class="company-card">
+        <div class="company-header">
+          <div>
+            <h3>KCS IT | ITSECTOR</h3>
+            <span class="company-role">Senior iOS Developer</span>
+          </div>
+          <span class="company-period">2020 – Present</span>
+        </div>
+        <ul>
+          <li>Delivered advanced features for Millennium BCP, Activobank, and Santander.</li>
+          <li>Collaborated with QA, backend, and product teams using Scrum.</li>
+          <li>Mentored interns, conducted interviews, and participated in team tech forums.</li>
+        </ul>
+        <details>
+          <summary>Show full feature list</summary>
+          <ul>
+            <li>MBWay Revamp</li>
+            <li>MBNet Revamp</li>
+            <li>3DSecure</li>
+            <li>Carbon footprint dashboard</li>
+            <li>E-Broker Investments, Deposits</li>
+            <li>Card activation, blocking, replacements</li>
+            <li>Chatbot, push notifications, salary features</li>
+            <li>Custom accessibility settings</li>
+            <li>In-app verification, global shortcuts, Salesforce notifications</li>
+            <li>Feature-rich personal finance tools</li>
+            <li>Account titles</li>
+            <li>Manage cards</li>
+            <li>Cancel cards</li>
+            <li>Cards offer</li>
+            <li>Tracking</li>
+            <li>Temporary lock / loss or theft</li>
+            <li>Banners manager</li>
+            <li>Activate cards</li>
+            <li>Instalments</li>
+            <li>Moonrise UI</li>
+            <li>Flagships tokens integration</li>
+            <li>Mobile top-ups</li>
+            <li>Internet top-ups</li>
+            <li>Card top-ups</li>
+            <li>Personal financial manager</li>
+            <li>Devices manager</li>
+            <li>Resolve</li>
+            <li>Flame UI</li>
+            <li>Payments</li>
+            <li>Proxy lookup</li>
+            <li>Paywatch</li>
+            <li>In-app verification</li>
+            <li>Movements data enrichment</li>
+            <li>Pre-login settings</li>
+            <li>Account details</li>
+            <li>Card details</li>
+            <li>Patrimony details</li>
+            <li>Profile image</li>
+            <li>Salary domiciliation</li>
+            <li>Product selector (Revamp)</li>
+            <li>Account closure</li>
+            <li>Travel bundle</li>
+            <li>Advance salary</li>
+            <li>Apple Pay improvements</li>
+            <li>Accounts avatars</li>
+            <li>Integrated solutions</li>
+            <li>Account holders</li>
+            <li>Dynamic menu improvements</li>
+            <li>Promo codes</li>
+            <li>Account opening - liveness</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="company-card">
+        <div class="company-header">
+          <div>
+            <h3>NOSHAPE</h3>
+            <span class="company-role">Mobile & Web Developer</span>
+          </div>
+          <span class="company-period">2017 – 2019</span>
+        </div>
+        <ul>
+          <li>Created mobile and web apps for Vodafone, Mercedes, Samsung, and more.</li>
+          <li>Used Laravel, Xamarin, Android SDK, Swift, C#.</li>
+        </ul>
+        <details>
+          <summary>Show feature list</summary>
+          <ul>
+            <li>Retail training system for Samsung stores</li>
+            <li>Security inspections mobile tool for Vodafone</li>
+            <li>Vehicle sales catalog (Mercedes buses)</li>
+            <li>Travel companion app for Portugal Trails</li>
+            <li>GDPR-compliant admin panels (Promofans)</li>
+            <li>Offline mobile tracking and logistics tools</li>
+          </ul>
+        </details>
+      </article>
+
+      <article class="company-card">
+        <div class="company-header">
+          <div>
+            <h3>WEBHELP & RANDSTAD</h3>
+            <span class="company-role">Senior Support Engineer / Support Engineer</span>
+          </div>
+          <span class="company-period">2010 – 2017</span>
+        </div>
+        <ul>
+          <li>Resolved complex Apple ecosystem issues (macOS, iOS, iCloud, hardware).</li>
+          <li>Provided multilingual support across Europe.</li>
+          <li>Maintained high satisfaction in technical support metrics.</li>
+        </ul>
+      </article>
+    </section>
+
+    <section>
+      <h2>Education & Certifications</h2>
+      <ul>
+        <li><strong>UAB</strong> – Informatics Engineering (2023–2025)</li>
+        <li><strong>University of Minho</strong> – Informatics Engineering (2014–2023)</li>
+        <li><strong>ESPROMINHO</strong> – Management Information Systems (2006–2009)</li>
+        <li><strong>Frontend Security</strong> – Immersive Labs (2022)</li>
+        <li><strong>iOS Development</strong> – Open Classrooms (2022)</li>
+        <li><strong>iOS Development</strong> – Pluralsight (2020)</li>
+        <li><strong>ITSector Training</strong> – English Academy, Data Protection, Technical Interviews, Accessibilities, Core AI, Copilot (2020-2026)</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <ul>
+        <li><strong>Languages:</strong> Swift, Objective-C, C#, Java, PHP, Haskell</li>
+        <li><strong>Frameworks:</strong> UIKit, Swift UI, Combine, CoreData, .NET, Laravel, Xamarin</li>
+        <li><strong>DevOps & Tools:</strong> Xcode, Visual Studio, Git, Azure, GitHub Actions</li>
+        <li><strong>Databases:</strong> MySQL, SQL Server, SQLite, MongoDB</li>
+        <li><strong>Methodologies:</strong> Agile (Scrum), CI/CD pipelines, SOLID principles</li>
+        <li><strong>Platforms:</strong> macOS, iOS, Windows, Linux</li>
+        <li><strong>Spoken Languages:</strong> English, Portuguese, Ukrainian, French</li>
+      </ul>
+    </section>
+    
+    <section>
+      <h2>Personal Projects</h2>
+      <ul>
+        <li><strong>DMusik:</strong> <a href="https://drohobytskyy.github.io/dMusic-web/index.html">visit web page</a> </li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; <span id="year"></span> Artur Drohobytskyy. All rights reserved.</p>
+  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("yearsCount").textContent = new Date().getFullYear() - 2017;
+  </script>
+</body>
+</html>
